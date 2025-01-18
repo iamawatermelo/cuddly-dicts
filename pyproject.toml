@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cuddly-dicts"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Sarah C", email = "pypi-maintainer@srh.dog" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython"
+]
+dependencies = [
+    
+]
+
+[project.urls]
+Documentation = "https://github.com/iamawatermelo/cuddly-dicts#readme"
+Issues = "https://github.com/iamawatermelo/cuddly-dicts/issues"
+Source = "https://github.com/iamawatermelo/cuddly-dicts"
+
+[tool.hatch.version]
+path = "src/cuddly_dicts/__about__.py"
+
+
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
