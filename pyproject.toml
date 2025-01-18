@@ -20,7 +20,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython"
 ]
 dependencies = [
-    
+    "kdl-py~=1.2.0"
 ]
 
 [project.urls]
@@ -29,13 +29,13 @@ Issues = "https://github.com/iamawatermelo/cuddly-dicts/issues"
 Source = "https://github.com/iamawatermelo/cuddly-dicts"
 
 [tool.hatch.version]
-path = "src/cuddly_dicts/__about__.py"
+path = "cuddly_dicts/__about__.py"
 
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+reportMissingModuleSource = false
+reportUnusedImport = true
 
-
-[tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
+[tool.hatch.envs.default]
+path = "./.venv/"

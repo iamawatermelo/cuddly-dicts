@@ -3,12 +3,9 @@
 Turn a KDL document like this:
 
 ```kdl
-landtable {
-    // Configuration version
-    version 1
-    
+landtable version=1 {
     // Minimum compatible Landtable version
-    ensure_landtable_version 0.0.1
+    ensure_landtable_version "0.0.1"
     
     provisioning {
         // Whether to allow runtime provisioning
