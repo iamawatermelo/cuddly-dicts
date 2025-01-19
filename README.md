@@ -75,6 +75,11 @@ Into a dict like this:
 - KDL node -> dict result
 - `landtable {}` -> `{"landtable": {}}`.
 - `version 1` -> `{"version": 1}`
+  - Repeated `version` nodes will create a list.
+    ```
+    alias "High Seas"
+    alias "hs"
+    ```
 - `landtable version=1 {}` -> `{"landtable": {"version": 1}}`
 - `strategy "Nest Postgres" {}` -> `{"strategy": {"Nest Postgres": {}}}`
   - Repeated `strategy` nodes will add another entry to the dict.

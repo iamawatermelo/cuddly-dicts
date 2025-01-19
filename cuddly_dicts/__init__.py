@@ -23,8 +23,13 @@ def _nodes_to_dict(node_list: Collection[kdl.Node], root_name: str) -> dict[str,
         match node:
             # Simple property
             case kdl.Node(name=name, args=[value], props=OrderedDict(), nodes=[]):
-                if ret.get(name):
-                    raise KDLTransformException(f"{name} already exists on {root_name}")
+                if thing := ret.get(name):
+                    if isinstance(thing, list):
+                        thing.append(value)
+                    else:
+                        ret[name] = [thing, value]
+                    
+                    continue
 
                 ret[name] = value
 
