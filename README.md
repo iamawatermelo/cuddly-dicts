@@ -80,6 +80,7 @@ Into a dict like this:
     alias "High Seas"
     alias "hs"
     ```
+    Will turn into `{"alias": ["High Seas", "hs"]}`
 - `landtable version=1 {}` -> `{"landtable": {"version": 1}}`
 - `strategy "Nest Postgres" {}` -> `{"strategy": {"Nest Postgres": {}}}`
   - Repeated `strategy` nodes will add another entry to the dict.
