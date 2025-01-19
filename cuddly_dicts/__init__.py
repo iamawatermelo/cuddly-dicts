@@ -2,7 +2,6 @@
 Turn a KDL document into a dict, following a set of very simple rules.
 """
 
-from collections import OrderedDict
 from typing import Any
 from typing import Collection
 
