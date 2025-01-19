@@ -22,7 +22,7 @@ def _nodes_to_dict(node_list: Collection[kdl.Node], root_name: str) -> dict[str,
 
         match node:
             # Simple property
-            case kdl.Node(name=name, args=[value], props=OrderedDict(), nodes=[]):
+            case kdl.Node(name=name, args=[value], nodes=[]) if len(node.props) == 0:
                 if thing := ret.get(name):
                     if isinstance(thing, list):
                         thing.append(value)
