@@ -74,6 +74,7 @@ Into a dict like this:
 
 - KDL node -> dict result
 - `landtable {}` -> `{"landtable": {}}`.
+  - Repeated `landtable` nodes will create a list.
 - `version 1` -> `{"version": 1}`
   - Repeated `version` nodes will create a list.
     ```

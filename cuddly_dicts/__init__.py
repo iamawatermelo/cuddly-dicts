@@ -34,10 +34,15 @@ def _nodes_to_dict(node_list: Collection[kdl.Node], root_name: str) -> dict[str,
 
             # Node with no args and some properties
             case kdl.Node(name=name, args=[], props=props, nodes=nodes):
-                if ret.get(name):
-                    raise KDLTransformException(f"{name} already exists on {root_name}")
+                value = {**_nodes_to_dict(nodes, f"{root_name}.{name}"), **props}
+                
+                if thing := ret.get(name):
+                    if isinstance(thing, list):
+                        thing.append(value)
+                    else:
+                        ret[name] = [thing, value]
 
-                ret[name] = {**_nodes_to_dict(nodes, f"{root_name}.{name}"), **props}
+                ret[name] = value
 
             # Node with args and properties
             case kdl.Node(name=name, args=[arg], props=props, nodes=nodes):
