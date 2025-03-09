@@ -86,6 +86,10 @@ Into a dict like this:
 - `strategy "Nest Postgres" {}` -> `{"strategy": {"Nest Postgres": {}}}`
   - Repeated `strategy` nodes will add another entry to the dict.
 
+cuddly_dicts (as of v3) supports value converters, so you can do things like this:
+
+- `definitely_encrypted_ssn (base64)"QUFBLUdHLVNTU1M="`
+
 ## License
 
 MIT or WTFPL, depending on how much of a prude you are

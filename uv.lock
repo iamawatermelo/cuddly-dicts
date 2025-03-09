@@ -1,0 +1,21 @@
+version = 1
+requires-python = ">=3.12"
+
+[[package]]
+name = "cuddly-dicts"
+source = { editable = "." }
+dependencies = [
+    { name = "kdl-py" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "kdl-py", specifier = "~=1.2.0" }]
+
+[[package]]
+name = "kdl-py"
+version = "1.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a4/35/caa43d276dd46efe73926e25024429fab25effca24ba0af3875ea5cdc362/kdl-py-1.2.0.tar.gz", hash = "sha256:63f3f46c6277dedadce44dcfc94672bf6e6bf3330b90122e0134c22857e29973", size = 29224 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b7/04/766286ba77621edf37225c66ce0ef2bceead987c69439b572e85ad27980c/kdl_py-1.2.0-py3-none-any.whl", hash = "sha256:d11e556dbb226cccf666bb4ffe17c73e9d5bb08d29976649fa9292bac973d3e2", size = 23665 },
+]

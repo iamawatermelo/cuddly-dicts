@@ -2,10 +2,11 @@
 Turn a KDL document into a dict, following a set of very simple rules.
 """
 
-from typing import Any
+from typing import Any, Callable
 from typing import Collection
 
 import kdl
+from kdl.parsing import ParseConfig
 
 
 class KDLTransformException(Exception):
@@ -66,9 +67,9 @@ def _nodes_to_dict(node_list: Collection[kdl.Node], root_name: str) -> dict[str,
 
 
 def kdl_document_to_dict(document: kdl.Document) -> dict[str, Any]:
-    return _nodes_to_dict(document.nodes, "")
+    return _nodes_to_dict(document.nodes, "", value_converters)
 
 
-def kdl_source_to_dict(source: str) -> dict[str, Any]:
-    document = kdl.parse(source)
+def kdl_source_to_dict(source: str, value_converters: dict[str, Callable[[Any], Any]] = {}) -> dict[str, Any]:
+    document = kdl.parse(source, ParseConfig(valueConverters=value_converters))
     return kdl_document_to_dict(document)
