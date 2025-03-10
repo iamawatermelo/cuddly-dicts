@@ -67,7 +67,7 @@ def _nodes_to_dict(node_list: Collection[kdl.Node], root_name: str) -> dict[str,
 
 
 def kdl_document_to_dict(document: kdl.Document) -> dict[str, Any]:
-    return _nodes_to_dict(document.nodes, "", value_converters)
+    return _nodes_to_dict(document.nodes, "")
 
 
 def kdl_source_to_dict(source: str, value_converters: dict[str, Callable[[Any], Any]] = {}) -> dict[str, Any]:
