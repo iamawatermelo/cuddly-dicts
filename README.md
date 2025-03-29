@@ -63,6 +63,111 @@ Into a dict like this:
 }
 ```
 
+## Conversion rules
+
+```
+version 1
+```
+
+becomes
+
+```
+{
+    "version": 1
+}
+```
+
+---
+
+```
+version 1
+version 2
+```
+
+becomes
+
+```
+{
+    "version": [1, 2]
+}
+```
+
+---
+
+```
+connector "foo"
+connector "bar" {
+  port /dev/ttyUSB0
+}
+```
+
+becomes
+
+```
+{
+    "connector": {
+        "foo": {},
+        "bar": {
+            "port": "/dev/ttyUSB0"
+        }
+    }
+}
+```
+
+> [!INFO]
+> New in 3.0.2.
+
+---
+
+```
+connector "foo" port="/dev/ttyUSB0"
+```
+
+becomes
+
+```
+{
+    "connector": {
+        "foo": {
+            "port": "/dev/ttyUSB0"
+        }
+    }
+}
+```
+
+---
+
+```
+connector "foo" port="/dev/ttyUSB0" {
+    baud_rate 24000
+}
+```
+
+becomes
+
+```
+{
+    "connector": {
+        "foo": {
+            "port": "/dev/ttyUSB0",
+            "baud_rate": 24000
+        }
+    }
+}
+```
+
+---
+
+cuddly_dicts (as of v3) supports value converters, so you can do things like this:
+
+```
+definitely_encrypted_ssn (base64)"QUFBLUdHLVNTU1M="
+```
+
+## License
+
+MIT or WTFPL, depending on how much of a prude you are
+
 ## Motivation
 
 - Keep using Landtable's existing validation library (Pydantic)
@@ -70,26 +175,5 @@ Into a dict like this:
   by making them all compile down to the same representation that can
   be validated
 
-## Conversion rules
-
-- KDL node -> dict result
-- `landtable {}` -> `{"landtable": {}}`.
-  - Repeated `landtable` nodes will create a list.
-- `version 1` -> `{"version": 1}`
-  - Repeated `version` nodes will create a list.
-    ```
-    alias "High Seas"
-    alias "hs"
-    ```
-    Will turn into `{"alias": ["High Seas", "hs"]}`
-- `landtable version=1 {}` -> `{"landtable": {"version": 1}}`
-- `strategy "Nest Postgres" {}` -> `{"strategy": {"Nest Postgres": {}}}`
-  - Repeated `strategy` nodes will add another entry to the dict.
-
-cuddly_dicts (as of v3) supports value converters, so you can do things like this:
-
-- `definitely_encrypted_ssn (base64)"QUFBLUdHLVNTU1M="`
-
-## License
-
-MIT or WTFPL, depending on how much of a prude you are
+cuddly_dicts proved to be more useful to me in other projects, so now I
+use it in most things.

@@ -26,6 +26,8 @@ def _nodes_to_dict(node_list: Collection[kdl.Node], root_name: str) -> dict[str,
                 if thing := ret.get(name):
                     if isinstance(thing, list):
                         thing.append(value)
+                    elif isinstance(thing, dict):
+                        thing[value] = {}
                     else:
                         ret[name] = [thing, value]
                     
@@ -49,12 +51,13 @@ def _nodes_to_dict(node_list: Collection[kdl.Node], root_name: str) -> dict[str,
             case kdl.Node(name=name, args=[arg], props=props, nodes=nodes):
                 node_dict = ret.get(name, {})
                 if not isinstance(node_dict, dict):
-                    raise KDLTransformException(
-                        f"{name} already exists on {root_name} and isn't a dictionary"
-                    )
+                    if isinstance(node_dict, list):
+                        node_dict = {x: {} for x in node_dict}
+                    else:
+                        node_dict = {node_dict: {}}
 
                 node_dict[arg] = {
-                    **_nodes_to_dict(nodes, f"{root_name}.{name}.{arg}"),
+                    **_nodes_to_dict(nodes, f"{root_name.lstrip(".")}.{name}.{arg}"),
                     **props,
                 }
 
@@ -67,7 +70,7 @@ def _nodes_to_dict(node_list: Collection[kdl.Node], root_name: str) -> dict[str,
 
 
 def kdl_document_to_dict(document: kdl.Document) -> dict[str, Any]:
-    return _nodes_to_dict(document.nodes, "")
+    return _nodes_to_dict(document.nodes, ".")
 
 
 def kdl_source_to_dict(source: str, value_converters: dict[str, Callable[[Any], Any]] = {}) -> dict[str, Any]:
