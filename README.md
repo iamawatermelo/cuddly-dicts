@@ -114,7 +114,7 @@ becomes
 }
 ```
 
-> [!INFO]
+> [!NOTE]  
 > New in 3.0.2.
 
 ---
